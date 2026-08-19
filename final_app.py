@@ -37,25 +37,21 @@ localisation for every document. Use the "Calibrate ROI regions" panel
 in the sidebar to tune them for your own scanner/camera setup, and treat
 this app as a reviewable-assistant, not an unattended decision-maker.
 """
+
+import difflib
+import json
+import re
+from datetime import datetime
+from io import BytesIO
+from typing import Optional
+
+# Defensively import PyMuPDF for multi-page PDF support
 try:
     import fitz  # PyMuPDF
     FITZ_IMPORT_ERROR: Optional[str] = None
 except ImportError as exc:
     fitz = None
     FITZ_IMPORT_ERROR = str(exc)
-
-from __future__ import annotations
-
-import difflib
-import json
-import re
-from datetime import datetime
-from typing import Optional
-
-import numpy as np
-import pandas as pd
-import streamlit as st
-from PIL import Image, UnidentifiedImageError
 
 # --- Optional heavy dependencies are imported defensively so a missing ---
 # --- package produces a friendly in-app message instead of a hard crash --
