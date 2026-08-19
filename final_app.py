@@ -37,6 +37,12 @@ localisation for every document. Use the "Calibrate ROI regions" panel
 in the sidebar to tune them for your own scanner/camera setup, and treat
 this app as a reviewable-assistant, not an unattended decision-maker.
 """
+try:
+    import fitz  # PyMuPDF
+    FITZ_IMPORT_ERROR: Optional[str] = None
+except ImportError as exc:
+    fitz = None
+    FITZ_IMPORT_ERROR = str(exc)
 
 from __future__ import annotations
 
@@ -458,13 +464,44 @@ def postprocess_field(field_def: dict, raw_text: str) -> str:
 # =====================================================================
 # Document-level extraction
 # =====================================================================
-def load_image(uploaded_file) -> Optional[np.ndarray]:
+# =====================================================================
+# Document-level extraction
+# =====================================================================
+def load_document_pages(uploaded_file) -> list[np.ndarray]:
+    """Load an image or render all pages of a PDF into a list of numpy arrays."""
+    if uploaded_file is None:
+        return []
+    
+    uploaded_file.seek(0)
+    file_bytes = uploaded_file.read()
+    file_name = getattr(uploaded_file, "name", "").lower()
+
+    # Handle PDF files using PyMuPDF
+    if file_name.endswith(".pdf") or uploaded_file.type == "application/pdf":
+        if FITZ_IMPORT_ERROR:
+            st.error(f"PyMuPDF is required to process PDFs ({FITZ_IMPORT_ERROR}). Run: `pip install PyMuPDF`")
+            return []
+        try:
+            doc = fitz.open(stream=file_bytes, filetype="pdf")
+            pages = []
+            for page in doc:
+                # Render page to a high-resolution pixmap (zoom factor 2 for clear OCR)
+                mat = fitz.Matrix(2.0, 2.0)
+                pix = page.get_pixmap(matrix=mat)
+                img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                pages.append(np.array(img))
+            doc.close()
+            return pages
+        except Exception as exc:
+            st.error(f"Could not parse PDF file: {exc}")
+            return []
+
+    # Handle standard image formats (PNG, JPG, JPEG)
     try:
-        uploaded_file.seek(0)
-        image = Image.open(uploaded_file).convert("RGB")
-        return np.array(image)
+        image = Image.open(BytesIO(file_bytes)).convert("RGB")
+        return [np.array(image)]
     except (UnidentifiedImageError, OSError):
-        return None
+        return []
 
 
 def extract_fields_from_document(image: np.ndarray, roi_dict: dict, denoise_strength: int) -> dict:
