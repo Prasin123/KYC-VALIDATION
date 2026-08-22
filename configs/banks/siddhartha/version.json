@@ -1,0 +1,9 @@
+{
+  "template_id": "siddhartha_personal_account_opening_v1",
+  "form_code": "SBL-PRT-002",
+  "template_version": "1.0.0",
+  "source_document": "Personal Account Opening Form Single/Joint (SBL-PRT-002), 6 pages",
+  "generated_by": "tools/build_siddhartha_config.py",
+  "generated_from_pdf_inspection": true,
+  "notes": "Regenerate by re-running tools/build_siddhartha_config.py against a new copy of the form if Siddhartha Bank revises SBL-PRT-002. Bump template_version when you do, and keep the previous personal_account_opening.json around (e.g. as .v1.json) if any in-flight review sessions still reference the old ROI layout."
+}

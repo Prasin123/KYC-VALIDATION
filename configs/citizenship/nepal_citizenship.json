@@ -1,0 +1,226 @@
+{
+  "template_id": "nepal_citizenship_v1",
+  "display_name": "Nepali Citizenship Certificate",
+  "document_type": "citizenship",
+  "source_note": "ROI coordinates seeded from inspection (Tesseract 'nep' word boxes + OpenCV border detection) of the supplied sample template. Coordinates are in pixels relative to a reference image width of 800px. The ROI editor rescales these to whatever resolution a new upload is rendered at, but you should verify/adjust with real filled samples before production use.",
+  "reference_image_size": [800, 598],
+  "pages": [
+    {
+      "page_number": 1,
+      "label": "Front",
+      "fields": [
+        {
+          "roi_name": "citizenship_number",
+          "field_type": "TEXT",
+          "language": "mixed",
+          "box": [40, 175, 200, 198],
+          "required": true,
+          "priority": "CRITICAL",
+          "notes": "Na.Pra.Nam field near top-left, above the Name row."
+        },
+        {
+          "roi_name": "full_name",
+          "field_type": "NAME",
+          "language": "nepali",
+          "box": [205, 210, 630, 232],
+          "required": true,
+          "priority": "CRITICAL",
+          "notes": "Nam Thar row."
+        },
+        {
+          "roi_name": "gender",
+          "field_type": "TEXT",
+          "language": "nepali",
+          "box": [645, 205, 800, 232],
+          "required": false,
+          "priority": "IMPORTANT",
+          "notes": "Ling (gender), printed top-right of the name row."
+        },
+        {
+          "roi_name": "photo_area",
+          "field_type": "PHOTO",
+          "language": null,
+          "box": [645, 0, 800, 105],
+          "required": false,
+          "priority": "OPTIONAL",
+          "notes": "Passport photo box, top-right."
+        },
+        {
+          "roi_name": "birth_place_district",
+          "field_type": "TEXT",
+          "language": "nepali",
+          "box": [378, 238, 620, 260],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "birth_place_municipality",
+          "field_type": "TEXT",
+          "language": "nepali",
+          "box": [378, 270, 620, 292],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "birth_place_ward",
+          "field_type": "NUMBER",
+          "language": "nepali",
+          "box": [665, 270, 800, 292],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "permanent_address_district",
+          "field_type": "TEXT",
+          "language": "nepali",
+          "box": [378, 294, 620, 316],
+          "required": true,
+          "priority": "IMPORTANT"
+        },
+        {
+          "roi_name": "permanent_address_municipality",
+          "field_type": "TEXT",
+          "language": "nepali",
+          "box": [378, 326, 620, 348],
+          "required": true,
+          "priority": "IMPORTANT"
+        },
+        {
+          "roi_name": "permanent_address_ward",
+          "field_type": "NUMBER",
+          "language": "nepali",
+          "box": [625, 320, 800, 348],
+          "required": true,
+          "priority": "IMPORTANT"
+        },
+        {
+          "roi_name": "dob_bs_year",
+          "field_type": "DATE",
+          "language": "nepali",
+          "box": [372, 350, 470, 372],
+          "required": true,
+          "priority": "CRITICAL",
+          "notes": "Saal (BS year), part of the Janma Miti row."
+        },
+        {
+          "roi_name": "dob_bs_month",
+          "field_type": "DATE",
+          "language": "nepali",
+          "box": [472, 350, 562, 372],
+          "required": true,
+          "priority": "CRITICAL",
+          "notes": "Mahina (BS month)."
+        },
+        {
+          "roi_name": "dob_bs_day",
+          "field_type": "DATE",
+          "language": "nepali",
+          "box": [563, 350, 660, 372],
+          "required": true,
+          "priority": "CRITICAL",
+          "notes": "Gate (BS day)."
+        },
+        {
+          "roi_name": "father_name",
+          "field_type": "NAME",
+          "language": "nepali",
+          "box": [260, 383, 575, 405],
+          "required": false,
+          "priority": "IMPORTANT"
+        },
+        {
+          "roi_name": "father_citizenship_no",
+          "field_type": "TEXT",
+          "language": "mixed",
+          "box": [645, 380, 800, 402],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "father_address",
+          "field_type": "ADDRESS",
+          "language": "nepali",
+          "box": [265, 405, 660, 427],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "mother_name",
+          "field_type": "NAME",
+          "language": "nepali",
+          "box": [312, 440, 575, 462],
+          "required": false,
+          "priority": "IMPORTANT"
+        },
+        {
+          "roi_name": "mother_citizenship_no",
+          "field_type": "TEXT",
+          "language": "mixed",
+          "box": [645, 437, 800, 459],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "mother_address",
+          "field_type": "ADDRESS",
+          "language": "nepali",
+          "box": [265, 463, 660, 485],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "spouse_name",
+          "field_type": "NAME",
+          "language": "nepali",
+          "box": [312, 490, 575, 512],
+          "required": false,
+          "priority": "OPTIONAL",
+          "notes": "Present only if the holder is/was married."
+        },
+        {
+          "roi_name": "spouse_citizenship_no",
+          "field_type": "TEXT",
+          "language": "mixed",
+          "box": [645, 493, 800, 515],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "spouse_address",
+          "field_type": "ADDRESS",
+          "language": "nepali",
+          "box": [265, 518, 660, 540],
+          "required": false,
+          "priority": "OPTIONAL"
+        },
+        {
+          "roi_name": "issuing_office_and_district",
+          "field_type": "TEXT",
+          "language": "nepali",
+          "box": [280, 92, 660, 132],
+          "required": true,
+          "priority": "CRITICAL",
+          "notes": "'District Administration Office, ....' header line names the issuing district/office."
+        },
+        {
+          "roi_name": "left_mark_area",
+          "field_type": "THUMBPRINT",
+          "language": null,
+          "box": [5, 255, 140, 460],
+          "required": false,
+          "priority": "OPTIONAL",
+          "notes": "Boxed area on the left; on real citizenship certificates this typically holds a signature and/or thumbprint. Verify against real samples -- treat as EXPERIMENTAL."
+        }
+      ]
+    }
+  ],
+  "back_page": {
+    "note": "No back-side sample was supplied. When a back image/page is uploaded, the app assigns it as 'Citizenship - Back' with no preconfigured fields until an operator adds ROIs via the ROI editor.",
+    "fields": []
+  },
+  "field_priority": {
+    "CRITICAL": ["citizenship_number", "full_name", "dob_bs_year", "dob_bs_month", "dob_bs_day", "issuing_office_and_district"],
+    "IMPORTANT": ["gender", "permanent_address_district", "permanent_address_municipality", "permanent_address_ward", "father_name", "mother_name"],
+    "OPTIONAL": ["birth_place_district", "birth_place_municipality", "birth_place_ward", "father_citizenship_no", "father_address", "mother_citizenship_no", "mother_address", "spouse_name", "spouse_citizenship_no", "spouse_address", "photo_area", "left_mark_area"]
+  }
+}
